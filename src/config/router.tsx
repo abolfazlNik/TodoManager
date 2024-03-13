@@ -11,6 +11,7 @@ const router = createBrowserRouter([
       path: "/todo/:id",
       element: <Todo/>,
     },
+    
   ]);
 
 export default router
