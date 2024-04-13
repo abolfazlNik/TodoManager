@@ -12,7 +12,7 @@ const updateTodo = (id:string , content:string , description:string) => {
     return axios.post(`/tasks/${id}`, {content , description})
 }
 
-const addTodo = (content:string , description:string) => {
+const addTodo = (id: string, content: string, description: string) => {
     return axios.post("/tasks",{content , description})
 }
 
