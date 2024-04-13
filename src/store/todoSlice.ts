@@ -6,8 +6,8 @@ export interface Todo {
 }
 
 const initialState: Todo = {
-   content: "",
-   description: "",
+      content: "",
+      description: "",
 };
 
 const todoSlice = createSlice({

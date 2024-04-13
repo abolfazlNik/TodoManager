@@ -10,21 +10,6 @@ const Todo = () => {
    const { id } = useParams<{ id: string }>();
    const fieldValue = useSelector((state: RootState) => state.todo);
 
-   // const { isLoading, data } = useQuery({
-   //    queryKey: ["todo"],
-   //    queryFn: () => {
-   //       id && getTodo(id);
-   //    },
-   // });
-   // async function getData() {
-   //    if (id) {
-   //       const { data } = await getTodo(id);
-   //    }
-   // }
-   // useEffect(() => {
-   //    getData();
-   // }, []);
-
    if (!id) {
       return <></>;
    }
