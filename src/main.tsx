@@ -9,7 +9,6 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import queryClient from "./config/query.tsx";
 
 axios.defaults.baseURL = import.meta.env.VITE_TODOIST_URL;
-console.log("axios", axios.defaults.baseURL);
 
 axios.defaults.headers.common["Authorization"] = `Bearer ${
    import.meta.env.VITE_TODOIST_KEY
