@@ -20,10 +20,10 @@ const TextField: FC<TextFieldProps> = ({ field, action }) => {
    return (
       <>
          <input
-            className="p-2"
+            className="w-60 h-10 p-2 rounded-md"
             placeholder={field}
             name={field}
-            value={fieldValue[field]}
+            defaultValue={fieldValue[field]}
             type="text"
             onChange={handleChange}
          />
