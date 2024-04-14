@@ -1,26 +1,22 @@
 import { useState } from "react";
 import "./App.css";
-import { addTodo, getTodos } from "./api/getTodos";
+import { addTodo } from "./api/getTodos";
 import { Todo } from "./types";
 import TodoCard from "./components/TodoCard";
-import { Link } from "react-router-dom";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import queryClient from "./config/query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import useTodo from "./hooks/useTodo";
 
 function App() {
+   const todoList = useTodo();
+   const queryClient = useQueryClient();
    const [content, setContent] = useState("");
    const [description, setDescription] = useState("");
-   const { data: todos, refetch } = useQuery<{ data: Todo[] }>({
-      queryKey: ["getTodos"],
-      queryFn: getTodos,
-   });
 
    const { mutate, isPending } = useMutation({
       mutationFn: (newTodo: Todo) =>
          addTodo(newTodo.id, newTodo.content, newTodo.description),
       onSuccess: () => {
          queryClient.invalidateQueries({ queryKey: ["getTodos"] });
-         refetch();
       },
    });
 
@@ -37,10 +33,10 @@ function App() {
 
    return (
       <div className="flex flex-wrap flex-col w-full items-center">
-         {todos?.data.map((todo) => (
-            <Link key={todo.id} className="w-1/2" to={`/todo/${todo.id}`}>
-               <TodoCard todo={todo} key={todo.id} />
-            </Link>
+         {todoList.todos?.data.map((todo) => (
+            <div key={todo.id} className="w-1/2">
+               <TodoCard todo={todo} />
+            </div>
          ))}
          {isPending && (
             <div className="border-gray-50 rounded-md animate-pulse bg-gray-700 p-3 w-1/2 mt-3 h-20" />

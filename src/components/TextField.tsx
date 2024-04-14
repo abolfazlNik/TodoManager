@@ -1,4 +1,4 @@
-import { ChangeEvent, FC } from "react";
+import { ChangeEvent, FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Todo } from "../store/todoSlice";
 
@@ -32,7 +32,3 @@ const TextField: FC<TextFieldProps> = ({ field, action }) => {
 };
 
 export default TextField;
-
-//action: ActionCreatorWithPayload<{ field: string; value: string }, string>;
-/* <TextField slice="todo" field="content" action={setTodo} />
-<TextField slice="todo" field="description" action={setTodo} /> */
