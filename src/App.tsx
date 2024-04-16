@@ -25,6 +25,7 @@ function App() {
       content: content,
       description: description,
    };
+
    const handleAddTodo = async () => {
       await mutate(newTodo);
       setContent("");
@@ -39,7 +40,7 @@ function App() {
             </div>
          ))}
          {isPending && (
-            <div className="border-gray-50 rounded-md animate-pulse bg-gray-700 p-3 w-1/2 mt-3 h-20" />
+            <div className="border-gray-50 rounded-md animate-pulse bg-gray-700 w-1/2 mt-3 h-20" />
          )}
          <div className="space-x-4 mt-4">
             <input
@@ -58,9 +59,10 @@ function App() {
             />
             <button
                className="bg-blue-700 text-white p-2"
+               disabled={isPending}
                onClick={() => handleAddTodo()}
             >
-               ADD
+               {isPending ? "ADD..." : "ADD"}
             </button>
          </div>
       </div>
