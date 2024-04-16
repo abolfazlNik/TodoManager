@@ -13,9 +13,9 @@ const TodoCard = ({ todo }: { todo: Todo }) => {
    });
 
    return (
-      <div className="p-3 w-full cursor-pointer relative">
+      <div className="my-3 w-full cursor-pointer relative">
          {isPending ? (
-            <div className="border blur-[1px] bg-gray-500 p-3 h-20 flex align-baseline justify-between">
+            <div className="rounded-md border blur-[1px] bg-gray-500 p-3 h-20 flex align-baseline justify-between">
                <div className="flex flex-col">
                   <div className="">{todo.content}</div>
                   <div className="text-gray-200">{todo.description}</div>
@@ -24,7 +24,7 @@ const TodoCard = ({ todo }: { todo: Todo }) => {
          ) : (
             <Link
                to={`/todo/${todo.id}`}
-               className="border border-gray-50 p-3 h-20 flex align-baseline justify-between"
+               className="rounded-md border border-gray-50 p-3 h-20 flex align-baseline justify-between"
             >
                <div className="flex flex-col">
                   <div className="">{todo.content}</div>
@@ -34,7 +34,7 @@ const TodoCard = ({ todo }: { todo: Todo }) => {
          )}
          {!isPending && (
             <div
-               className="absolute top-7 right-7 text-red-500"
+               className="absolute top-4 right-4 text-red-500"
                onClick={() => mutate(todo.id)}
             >
                Delete

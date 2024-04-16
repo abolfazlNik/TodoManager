@@ -5,12 +5,17 @@ import { setTodo } from "../store/todoSlice";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 
 const Todo = () => {
    const navigate = useNavigate();
    const queryClient = useQueryClient();
    const { id } = useParams<{ id: string }>();
    const fieldValue = useSelector((state: RootState) => state.todo);
+   const [inputValues, setInputValues] = useState({
+      content: "",
+      description: "",
+   });
 
    if (!id) {
       return <div>Todo not found.</div>;
@@ -21,6 +26,15 @@ const Todo = () => {
       queryFn: () => getTodo(id),
    });
 
+   useEffect(() => {
+      if (data?.data) {
+         const { content, description } = data?.data;
+         setInputValues({
+            content: content || "",
+            description: description || "",
+         });
+      }
+   }, [data]);
    return (
       <div className="space-x-4">
          {isLoading ? (
@@ -31,8 +45,16 @@ const Todo = () => {
             </div>
          ) : (
             <>
-               <TextField field="content" action={setTodo} />
-               <TextField field="description" action={setTodo} />
+               <TextField
+                  inputValues={inputValues}
+                  field="content"
+                  action={setTodo}
+               />
+               <TextField
+                  inputValues={inputValues}
+                  field="description"
+                  action={setTodo}
+               />
                <button
                   className="bg-blue-700 text-white p-2 w-16"
                   onClick={async () => {
@@ -43,6 +65,7 @@ const Todo = () => {
                      );
                      navigate("/");
                      queryClient.invalidateQueries({ queryKey: ["getTodos"] });
+                     queryClient.invalidateQueries({ queryKey: ["getTodo"] });
                   }}
                >
                   SAVE
